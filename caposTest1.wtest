@@ -1,0 +1,49 @@
+import capos.*
+
+
+describe "Ejercicio 1" {
+  test "Parte 1" {
+    rolando.equiparArtefacto(espadaDelDestino)
+    assert.that(rolando.tieneArtefacto(espadaDelDestino))
+    rolando.equiparArtefacto(libroDeHechizos)
+    assert.throwsException({rolando.equiparArtefacto(collarDivino)})
+    assert.equals(#{espadaDelDestino,libroDeHechizos}, rolando.mochila())
+  }
+
+  test "1.2"{
+    rolando.equiparArtefacto(espadaDelDestino)
+    rolando.equiparArtefacto(libroDeHechizos)
+    rolando.estaEnElHogar(true)
+    rolando.guardarObjetos()
+    rolando.equiparArtefacto(collarDivino)
+    rolando.guardarObjetos()
+    assert.equals(#{espadaDelDestino,collarDivino,libroDeHechizos}, castillo.vaul())
+  }
+  test "1.3"{
+    rolando.equiparArtefacto(espadaDelDestino)
+    rolando.equiparArtefacto(ArmaduraDeAceroValynio)
+    rolando.estaEnElHogar(true)
+    rolando.guardarObjetos()
+    rolando.equiparArtefacto(collarDivino)
+    rolando.guardarObjetos()
+    assert.that(rolando.tieneArtefacto(ArmaduraDeAceroValynio))
+    assert.that(rolando.tieneArtefacto(collarDivino))
+    assert.that(rolando.tieneArtefacto(ArmaduraDeAceroValynio))
+    assert.equals(#{espadaDelDestino, collarDivino,ArmaduraDeAceroValynio}, rolando.artefactosDeRolando())
+  }
+  test "1.4" {
+    rolando.equiparArtefacto(espadaDelDestino)
+    rolando.equiparArtefacto(libroDeHechizos)
+    assert.throwsException({rolando.equiparArtefacto(collarDivino)})
+    rolando.estaEnElHogar(true)
+    rolando.guardarObjetos()
+    rolando.estaEnElHogar(false)
+    rolando.equiparArtefacto(ArmaduraDeAceroValynio)
+    rolando.equiparArtefacto(collarDivino)
+    assert.equals([espadaDelDestino,libroDeHechizos,collarDivino,ArmaduraDeAceroValynio,collarDivino], rolando.historialDeObjetos())
+  }
+  test "PARTE 2"{
+    rolando.estaEnElHogar(false)
+    assert.equals(#{}, rolando.mochila())
+  }
+}
